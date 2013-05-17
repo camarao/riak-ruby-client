@@ -277,7 +277,9 @@ module Riak
 
     # Get multiple objects in parallel.
     def get_many(pairs)
-
+      multi = Multiget.new self, pairs
+      multi.fetch
+      multi.results
     end
 
     # Get an object. See Bucket#get

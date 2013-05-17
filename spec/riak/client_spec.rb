@@ -209,12 +209,16 @@ describe Riak::Client do
     end
 
     it 'should accept an array of bucket and key pairs' do
+      @bucket.should_receive(:[]).with('value1')
+      @bucket.should_receive(:[]).with('value2')
       lambda{ @client.get_many(@pairs) }.should_not raise_error
     end
 
     it 'should return a hash of bucket/key pairs and robjects' do
+      @bucket.should_receive(:[]).with('value1')
+      @bucket.should_receive(:[]).with('value2')
       @results = @client.get_many(@pairs)
-      @results.should be_a Array
+      @results.should be_a Hash
       @results.length.should be(@pairs.length)
     end
   end
