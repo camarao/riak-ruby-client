@@ -274,6 +274,11 @@ module Riak
       end
     end
 
+    # Get multiple objects in parallel.
+    def get_many(pairs)
+
+    end
+
     # Get an object. See Bucket#get
     def get_object(bucket, key, options = {})
       backend do |b|
