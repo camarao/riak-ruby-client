@@ -14,6 +14,7 @@ require 'riak/client/excon_backend'
 require 'riak/client/protobuffs_backend'
 require 'riak/client/beefcake_protobuffs_backend'
 require 'riak/bucket'
+require 'riak/multiget'
 require 'riak/stamp'
 
 module Riak
