@@ -20,6 +20,7 @@ describe Riak::Multiget do
 
       @multiget = Riak::Multiget.new(@client, @pairs)
       @multiget.fetch
+      @multiget.wait_for_finish
     end
 
     it "should asynchronously fetch" do
@@ -32,8 +33,8 @@ describe Riak::Multiget do
         next if key == 'key1'
 
         # wait for test process
-        @mtx.lock
-      end
+        @slow_mtx.lock
+      end.twice
 
       # start fetch process
       @multiget = Riak::Multiget.new(@client, @pairs)
@@ -42,15 +43,24 @@ describe Riak::Multiget do
       @multiget.finished?.should be_false
 
       # allow fetch 
-      @mtx.unlock
+      @slow_mtx.unlock
 
       @results = @multiget.results
       @multiget.finished?.should be_true
-      @results.should be_a Array
+      @results.should be_a Hash
     end
   end
 
   describe "results" do
-    it "should return a hash of pairs to values"
+    it "should return a hash of pairs to values" do
+      @bucket.should_receive(:[]).with('key1')
+      @bucket.should_receive(:[]).with('key2')
+      
+      @multiget = Riak::Multiget.new(@client, @pairs)
+      @multiget.fetch
+      @results = @multiget.results
+
+      @results.should be_a Hash
+    end
   end
 end
