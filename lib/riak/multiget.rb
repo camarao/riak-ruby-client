@@ -5,6 +5,7 @@ require 'riak/cluster'
 module Riak
   # Coordinates a parallel fetch operation for multiple values.
   class Multiget
+    include Util::Translation
 
     # @return [Riak::Client] the associated client
     attr_reader :client
