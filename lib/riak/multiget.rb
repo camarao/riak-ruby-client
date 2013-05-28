@@ -13,7 +13,7 @@ module Riak
     # @return [Array<Bucket, String>] fetch_list an {Array} of {Bucket} and {String} keys to fetch
     attr_reader :fetch_list
 
-    # @return Hash<fetch_list_entry, RObject] result_hash a {Hash} of {Bucket} and {String} key pairs to {RObject} instances
+    # @return [Hash<fetch_list_entry, RObject] result_hash a {Hash} of {Bucket} and {String} key pairs to {RObject} instances
     attr_accessor :result_hash
 
     # @return Boolean finished if the fetch operation has completed
@@ -30,7 +30,7 @@ module Riak
     end
 
     # Create a Riak Multiget operation.
-    # @param [Client] client the {Riak::Client} for this bucket
+    # @param [Client] client the {Riak::Client} that will perform the multiget
     # @param [Array<Bucket, String>] fetch_list an {Array} of {Bucket} and {String} keys to fetch
     def initialize(client, fetch_list)
       raise ArgumentError, t('client_type', client: client.inspect) unless client.is_a? Riak::Client
