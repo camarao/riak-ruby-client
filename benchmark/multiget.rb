@@ -6,13 +6,15 @@ require 'riak'
 # require 'riak/test_server'
 
 puts "Ruby #{RUBY_VERSION} #{RUBY_PLATFORM}"
+puts Time.now.to_s
 
-count = 500
+count = ENV['MULTIGET_COUNT'].to_i
+puts "Count #{count}"
 
 # config = YAML.load_file(File.expand_path("../../spec/support/test_server.yml", __FILE__))
 
 cluster = (1..4).map do |n|
-  {host: '10.0.38.132', pb_port: "100#{n}7" }
+  {host: '10.0.38.132', http_port: "100#{n}8" }
 end
 
 client = Riak::Client.new nodes: cluster
@@ -54,3 +56,5 @@ end
 # keys.each do |k|
 #   bucket.delete k
 # end
+
+puts
