@@ -12,7 +12,7 @@ count = ENV['MULTIGET_COUNT'].to_i
 puts "Count #{count}"
 
 threads = ENV['MULTIGET_THREADS'].to_i
-puts "Threads #{count}"
+puts "Threads #{threads}"
 
 # config = YAML.load_file(File.expand_path("../../spec/support/test_server.yml", __FILE__))
 
