@@ -202,7 +202,7 @@ module Riak
         return
       end
 
-      if count.is_a? Integer && count > 1
+      if count.is_a?(Integer) && count > 1
         @multiget_threads = count
         return
       end

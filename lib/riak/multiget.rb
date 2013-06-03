@@ -52,7 +52,7 @@ module Riak
       queue = fetch_list.dup
       mutex = Mutex.new
 
-      unless thread_count.is_a? Integer && thread_count > 0
+      unless thread_count.is_a?(Integer) && thread_count > 0
         raise ArgumentError, t("invalid_multiget_thread_count")
       end
 
